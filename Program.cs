@@ -26,7 +26,7 @@ namespace ConsoleGameSnake
             Console.SetCursorPosition(82, 0);
             Console.Write("To start the game press something");
             Console.SetCursorPosition(82, 1);
-            Console.Write("Snake game by Artur Imamutdinov");
+            Console.Write("Snake game");
             Console.SetCursorPosition(82, 2);
             Console.Write("Keyboard controls :");
             Console.SetCursorPosition(82, 3);
