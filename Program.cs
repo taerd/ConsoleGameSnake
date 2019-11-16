@@ -23,6 +23,8 @@ namespace ConsoleGameSnake
             food.CreateFood();
             snake = new Snake(x / 2, y / 2);
             bool eat = false;
+            Console.SetCursorPosition(82, 0);
+            Console.Write("To start the game press something");
             Console.SetCursorPosition(82, 1);
             Console.Write("Snake game by Artur Imamutdinov");
             Console.SetCursorPosition(82, 2);
@@ -39,22 +41,26 @@ namespace ConsoleGameSnake
             Console.Write("ESC- ESCAPE");
 
             ConsoleKeyInfo pressed;
+            pressed = Console.ReadKey();
             snake.direction = Snake.Direction.RIGHT;
             time = new Timer(Loop, null, 0, 200);
 
             do
             {
-                pressed = Console.ReadKey();
-                snake.Move(pressed.Key);
-                eat=snake.CheckFood(food.position);
-                if (eat)
+                if (Console.KeyAvailable)
                 {
-                    food.CreateFood();
-                    eat = false;
+                    pressed = Console.ReadKey();
+                    snake.Move(pressed.Key);
+                    eat = snake.CheckFood(food.position);
+                    if (eat)
+                    {
+                        food.CreateFood();
+                        eat = false;
+                    }
                 }
             } while (!wall.IsHit(snake.GetHead()) && !snake.IsHit(snake.GetHead()) && pressed.Key != ConsoleKey.Escape);
 
-            Console.SetCursorPosition(82, 8);
+            Console.SetCursorPosition(82, 10);
             Console.Write("Game over");
             Console.ReadKey();
 
@@ -71,7 +77,6 @@ namespace ConsoleGameSnake
             }
             if (wall.IsHit(snake.GetHead()) || snake.IsHit(snake.GetHead())) 
             {
-
                 time.Change(0, Timeout.Infinite);
             }
             else if (snake.CheckFood(food.position))
